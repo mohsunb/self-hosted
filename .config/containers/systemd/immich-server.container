@@ -1,0 +1,21 @@
+[Unit]
+Description=Immich server container
+Requires=immich-redis.service immich-postgres.service
+After=immich-redis.service immich-postgres.service
+
+[Container]
+Image=ghcr.io/immich-app/immich-server:v1.135.3
+ContainerName=immich-server
+Network=immich.network
+NetworkAlias=immich-server
+Volume=/home/mohsun/Data/Immich/library:/usr/src/app/upload:Z
+Volume=/etc/localtime:/etc/localtime:ro
+Secret=immich-postgres-password
+EnvironmentFile=/home/mohsun/.config/containers/systemd/immich.env
+PublishPort=2283:2283
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

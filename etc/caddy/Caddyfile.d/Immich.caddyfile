@@ -1,0 +1,3 @@
+YOUR_HOSTNAME:10003 {
+	reverse_proxy :2283
+}

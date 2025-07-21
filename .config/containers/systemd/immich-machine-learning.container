@@ -1,0 +1,17 @@
+[Unit]
+Description=Immich machine learning container
+
+[Container]
+Image=ghcr.io/immich-app/immich-machine-learning:v1.135.3
+ContainerName=immich-machine-learning
+Network=immich.network
+NetworkAlias=immich-machine-learning
+Volume=immich-machine-learning-model-cache.volume:/cache:Z
+Secret=immich-postgres-password
+EnvironmentFile=/home/mohsun/.config/containers/systemd/immich.env
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

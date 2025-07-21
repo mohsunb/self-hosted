@@ -1,0 +1,16 @@
+[Unit]
+Description=Nextcloud server container
+Requires=nextcloud-postgres.service
+After=nextcloud-postgres.service
+
+[Container]
+Image=docker.io/nextcloud:31.0.6
+ContainerName=nextcloud-server
+Network=nextcloud.network
+NetworkAlias=server
+PublishPort=8080:80
+Environment=NEXTCLOUD_TRUSTED_DOMAINS=YOUR_HOSTNAME:10002
+Volume=/home/mohsun/Data/Nextcloud/server:/var/www/html:Z
+
+[Install]
+WantedBy=default.target

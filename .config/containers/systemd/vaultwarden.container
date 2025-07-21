@@ -1,0 +1,11 @@
+[Unit]
+Description=Vaultwarden container
+
+[Container]
+Image=docker.io/vaultwarden/server:1.34.1
+ContainerName=vaultwarden
+PublishPort=8000:80
+Volume=/home/mohsun/Data/Vaultwarden:/data:Z
+
+[Install]
+WantedBy=default.target

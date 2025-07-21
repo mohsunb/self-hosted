@@ -1,0 +1,17 @@
+[Unit]
+Description=Immich PostgreSQL container
+
+[Container]
+Image=ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+ContainerName=immich-postgres
+Network=immich.network
+NetworkAlias=database
+Volume=/home/mohsun/Data/Immich/postgres:/var/lib/postgresql/data:Z
+Secret=immich-postgres-password
+Environment=POSTGRES_PASSWORD_FILE=/run/secrets/immich-postgres-password
+Environment=POSTGRES_USER=postgres
+Environment=POSTGRES_DB=immich
+Environment=POSTGRES_INITDB_ARGS='--data-checksums'
+
+[Install]
+WantedBy=default.target
