@@ -4,7 +4,7 @@ Requires=nextcloud-postgres.service
 After=nextcloud-postgres.service
 
 [Container]
-Image=docker.io/nextcloud:31.0.6
+Image=docker.io/nextcloud:31.0.12
 ContainerName=nextcloud-server
 Network=nextcloud.network
 NetworkAlias=server
