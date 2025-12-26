@@ -5,6 +5,10 @@
   "passwd": {
     "users": [
       {
+        "name": "core",
+        "shouldExist": false
+      },
+      {
         "groups": [
           "wheel"
         ],
