@@ -1,0 +1,15 @@
+{
+  "ignition": {
+    "version": "3.5.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "mohsun",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHEvGmrXV+ny0G753422CheY+NUUQCY1SPaM1mzaxls/ Ogrim"
+        ]
+      }
+    ]
+  }
+}
