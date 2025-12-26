@@ -6,6 +6,7 @@
     "users": [
       {
         "name": "mohsun",
+        "passwordHash": "$y$j9T$q8XeQ.4BWDyykq.4QoMCX0$fOTAKAghaM4dLIoJD5XlxNw1c71h5QSm/NeyEochk93",
         "sshAuthorizedKeys": [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHEvGmrXV+ny0G753422CheY+NUUQCY1SPaM1mzaxls/ Ogrim"
         ]
