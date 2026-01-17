@@ -9,7 +9,7 @@ ContainerName=nextcloud-server
 Network=nextcloud.network
 NetworkAlias=server
 PublishPort=8080:80
-Environment=NEXTCLOUD_TRUSTED_DOMAINS=YOUR_HOSTNAME:10002
+Environment=NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.example.com
 Volume=/home/mohsun/Data/Nextcloud/server:/var/www/html:Z
 
 [Install]

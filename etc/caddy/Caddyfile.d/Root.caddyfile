@@ -1,0 +1,4 @@
+example.com {
+	root * /etc/caddy/cloudflare-error-page
+	file_server
+}
