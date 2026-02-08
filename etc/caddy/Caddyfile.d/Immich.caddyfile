@@ -1,6 +1,7 @@
 immich.mohsun.az {
 	reverse_proxy :2283
-        log {
-                output file /var/log/caddy/immich/access.log
-        }
+
+	log {
+		output file /var/log/caddy/immich/access.log
+	}
 }

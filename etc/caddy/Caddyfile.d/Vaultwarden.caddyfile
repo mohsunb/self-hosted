@@ -1,6 +1,7 @@
 vaultwarden.mohsun.az {
 	reverse_proxy :8000
-        log {
-                output file /var/log/caddy/vaultwarden/access.log
-        }
+
+	log {
+		output file /var/log/caddy/vaultwarden/access.log
+	}
 }

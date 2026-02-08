@@ -6,7 +6,7 @@ nextcloud.mohsun.az {
 		header_down Strict-Transport-Security "max-age=15552000; includeSubDomains"
 	}
 
-        log {
-                output file /var/log/caddy/nextcloud/access.log
-        }
+	log {
+		output file /var/log/caddy/nextcloud/access.log
+	}
 }

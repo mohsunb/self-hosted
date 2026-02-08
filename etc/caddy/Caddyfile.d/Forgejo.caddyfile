@@ -3,7 +3,8 @@ git.mohsun.az {
 		header_up X-Real-Ip {remote_host}
 		header_up X-Http-Version {http.request.proto}
 	}
-        log {
-                output file /var/log/caddy/forgejo/access.log
-        }
+
+	log {
+		output file /var/log/caddy/forgejo/access.log
+	}
 }
