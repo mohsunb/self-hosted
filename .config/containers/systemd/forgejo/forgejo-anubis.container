@@ -1,0 +1,17 @@
+[Unit]
+Description=Forgejo Anubis container
+
+[Container]
+Image=ghcr.io/techarohq/anubis:latest
+ContainerName=forgejo-anubis
+Network=forgejo.network
+NetworkAlias=forgejo-anubis
+Environment=BIND=":3000"
+Environment=TARGET="http://forgejo-server:3000"
+PublishPort=3000:3000
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

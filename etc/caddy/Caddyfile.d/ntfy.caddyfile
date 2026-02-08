@@ -1,0 +1,14 @@
+ntfy.mohsun.az, http://ntfy.mohsun.az {
+	reverse_proxy 127.0.0.1:8082
+
+	@httpget {
+		protocol http
+		method GET
+		path_regexp ^/([-_a-z0-9]{0,64}$|docs/|static/)
+	}
+	redir @httpget https://{host}{uri}
+
+        log {
+                output file /var/log/caddy/ntfy/access.log
+        }
+}

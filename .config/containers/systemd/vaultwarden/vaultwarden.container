@@ -6,7 +6,7 @@ Image=docker.io/vaultwarden/server:1.35.2
 ContainerName=vaultwarden
 PublishPort=8000:80
 Volume=/home/mohsun/Data/Vaultwarden:/data:Z
-Environment=ADMIN_TOKEN="$$argon2id$$v=19$$m=65540,t=3,p=4$$Y3I1TmFPZ2dwZnBIMGVGYmxHQTJYZnUwV21LY0Y1cWdPRTNvaU15cjRUZz0$$8f+kgI0iYaZoSKvS8Ya9bGB5H2JeFIk2lbRkREi8zy4"
+Environment=ADMIN_TOKEN="ENTER_TOKEN_HASH_HERE"
 
 [Install]
 WantedBy=default.target
