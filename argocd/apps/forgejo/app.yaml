@@ -1,0 +1,97 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: forgejo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: forgejo
+    repoURL: code.forgejo.org/forgejo-helm
+    targetRevision: 17.0.1
+    helm:
+      releaseName: forgejo
+      valuesObject:
+        strategy:
+          type: RollingUpdate
+        service:
+          ssh:
+            type: LoadBalancer
+        gitea:
+          admin:
+            username: ""
+          config:
+            security:
+              SECRET_KEY: ""
+            database:
+              DB_TYPE: postgres
+            queue:
+              TYPE: redis
+            cache:
+              ADAPTER: redis
+            session:
+              PROVIDER: redis
+            server:
+              DOMAIN: forge.mohsun.az
+              ROOT_URL: https://forge.mohsun.az
+              SSH_DOMAIN: forge.mohsun.az
+            repository.signing:
+              FORMAT: ssh
+              SIGNING_KEY: /data/git/.ssh-signing/key.pub
+              SIGNING_NAME: "mohsun.az Instance"
+              SIGNING_EMAIL: noreply@mohsun.az
+              INITIAL_COMMIT: pubkey
+              DEFAULT_TRUST_MODEL: pubkey
+              CRUD_ACTIONS: pubkey
+              MERGES: pubkey
+          additionalConfigFromEnvs:
+            - name: FORGEJO__DATABASE__HOST
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: host
+            - name: FORGEJO__DATABASE__NAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: dbname
+            - name: FORGEJO__DATABASE__USER
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: user
+            - name: FORGEJO__DATABASE__PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: password
+            - name: FORGEJO__QUEUE__CONN_STR
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: conn-str-db0
+            - name: FORGEJO__CACHE__HOST
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: conn-str-db1
+            - name: FORGEJO__SESSION__PROVIDER_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: conn-str-db2
+            - name: FORGEJO__SECURITY__INTERNAL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: security-config
+                  key: internal-token
+        signing:
+          enabled: true
+          ssh:
+            existingSecret: signing-key
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: forgejo
+  syncPolicy:
+    automated:
+      enabled: true
