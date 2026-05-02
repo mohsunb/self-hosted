@@ -10,3 +10,4 @@ resources:
   - app.yaml
   - ingress.yaml
   - networkpolicy.yaml
+  - certificate.yaml

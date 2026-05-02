@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: forgejo
+  namespace: forgejo
+spec:
+  secretName: forge-mohsun-az-tls
+  dnsNames:
+    - "forge.mohsun.az"
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer

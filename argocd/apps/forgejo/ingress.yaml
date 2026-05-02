@@ -18,7 +18,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`forge.mohsun.az`)
+      match: Host(`forge.mohsun.az`) && !PathPrefix(`/.well-known/acme-challenge/`)
       services:
         - name: forgejo-http
           port: 3000
@@ -40,4 +40,4 @@ spec:
         - name: forgejo-http
           port: 3000
   tls:
-    certResolver: default
+    secretName: forge-mohsun-az-tls
