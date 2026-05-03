@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: immich-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: immich
+    repoURL: ghcr.io/immich-app/immich-charts
+    targetRevision: 0.11.1
+    helm:
+      releaseName: immich
+      valuesObject:
+        controllers:
+          main:
+            containers:
+              main:
+                image:
+                  tag: v2.7.5
+                env:
+                  REDIS_HOSTNAME: '{{ printf "%s-valkey" .Release.Name }}'
+                  IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
+                  DB_HOSTNAME:
+                    valueFrom:
+                      secretKeyRef:
+                        name: database-app
+                        key: host
+                  DB_USERNAME:
+                    valueFrom:
+                      secretKeyRef:
+                        name: database-app
+                        key: user
+                  DB_PASSWORD:
+                    valueFrom:
+                      secretKeyRef:
+                        name: database-app
+                        key: password
+                  DB_DATABASE_NAME:
+                    valueFrom:
+                      secretKeyRef:
+                        name: database-app
+                        key: dbname
+        immich:
+          persistence:
+            library:
+              existingClaim: library
+        valkey:
+          enabled: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: immich
+  syncPolicy:
+    automated:
+      enabled: true
