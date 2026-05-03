@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: argocd/cnpg
-    repoURL: https://github.com/mohsunb/self-hosted.git
+    repoURL: https://forge.mohsun.az/mohsunb/self-hosted.git
     targetRevision: main
   syncPolicy:
     syncOptions:
