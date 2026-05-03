@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  namespace: nextcloud
+spec:
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      containers:
+        - name: nextcloud
+          image: docker.io/nextcloud:33.0.3
+          env:
+            - name: REDIS_HOST
+              value: valkey
+            - name: REDIS_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: password
+          volumeMounts:
+            - name: data
+              mountPath: /var/www/html
+          ports:
+            - containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /heartbeat
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: sync.mohsun.az
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: sync.mohsun.az
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
