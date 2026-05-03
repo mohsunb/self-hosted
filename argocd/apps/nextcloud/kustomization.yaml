@@ -7,3 +7,4 @@ resources:
   - cache
   - server
   - networkpolicy.yaml
+  - certificate.yaml
