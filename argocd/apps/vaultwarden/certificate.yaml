@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  secretName: vault-mohsun-az-tls
+  dnsNames:
+    - "vault.mohsun.az"
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer

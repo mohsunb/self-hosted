@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  namespace: vaultwarden
+spec:
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      containers:
+        - name: vaulwarden
+          image: docker.io/vaultwarden/server:1.35.8
+          envFrom:
+            - secretRef:
+                name: database-config
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          ports:
+            - containerPort: 80
+          startupProbe:
+            httpGet:
+              path: /alive
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /alive
+              port: 80
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3

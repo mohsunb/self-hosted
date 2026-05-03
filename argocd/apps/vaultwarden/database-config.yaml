@@ -1,0 +1,12 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: database-config
+  namespace: vaultwarden
+spec:
+  encryptedData:
+    DATABASE_URL: AgBN/DZEpabvIj00Z69OpC+buQpj2oXsFuPF26q+1hDHuL0QQW3vJPdJc+aib+QPKSSkMcnJPdDJK9K3eEhCVsUy2GYqcztMAf/EvrxSQIDqr3eZtnTr+YqNqcYoO2soSqxTE6LwP7OfXUWgWaiLlVzNQN43vZa9b3p3dJVMHtFBIocYsJ/lmITebQJVVVIOe9r9jjTUYhIt1y962gSJYTInlPzEst3tsG6aSp577P3OO+y5ur7WaDfyfp3DHMhnlD6YkYwoVJfrL/lR6E9xoAs0J8NNZPm2FoaPi1OD8hVyhYMWng4JaoWAPJ71wEe+u8TG7sDC+4NjyrWC+rsRNIDRRO8Jeknf4DR2nesrdW4BnSvvgG0p0kvc+Hf+wYRkIXN+mwIGbqfq5i3tZEOKldYICSx6ZLgCgbfYswi4/0VnO9IRQL4vSevtw8pvezcFeEaU4ocGLCsESdJX4JLnvttVO9v0i2uXipdmrn6qIuFCH2MnJWi+Psp9IeJ8DMWf/94zieRriBXSJoS8BZSDSvM9YTvFl1UxqyZB1vO3tZvECO2zRA39rp7HH6bxdysJuGazGf3aIx2KImQj+Rz9EruEuWV8Ls/p+NBb7lH9HKdv1xRFaNbzB+b3kbTsvX5TwtqMx6ZPKzjA7tKiJJ3vAmPtKJLb3o1yENWhYToXlkYRlU4Mb1TWUuBALwWzjFf4qMrOhsLqLQptDERnsn9q32EdnatqmG6bo9rPRFoCKCAN+7geWVZi7aHKDLyOGCdow1LSixkmkbH5LaAYfNR+IRo4y8MxSRgLv9E/I6U1ooueKQk50rvbfmxUmy3xK4BrtbIwE2W3Qk31MA==
+  template:
+    metadata:
+      name: database-config
+      namespace: vaultwarden
