@@ -1,0 +1,43 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: upgrade-scheme
+  namespace: fmd
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: server-http
+  namespace: fmd
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`track.mohsun.az`) && !PathPrefix(`/.well-known/acme-challenge/`)
+      services:
+        - name: server
+          port: 8080
+      middlewares:
+        - name: upgrade-scheme
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: server-https
+  namespace: fmd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`track.mohsun.az`)
+      services:
+        - name: server
+          port: 8080
+  tls:
+    secretName: track-mohsun-az-tls
