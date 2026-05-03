@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://forge.mohsun.az/mohsunb/self-hosted.git
+        repoURL: https://github.com/mohsunb/self-hosted.git
         revision: main
         directories:
           - path: argocd/apps/*
@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://forge.mohsun.az/mohsunb/self-hosted.git
+        repoURL: https://github.com/mohsunb/self-hosted.git
         targetRevision: main
         path: '{{path}}'
       destination:
