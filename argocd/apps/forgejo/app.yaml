@@ -85,6 +85,11 @@ spec:
                 secretKeyRef:
                   name: security-config
                   key: internal-token
+            - name: FORGEJO__SECURITY__SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: security-config
+                  key: secret-key
         signing:
           enabled: true
           ssh:
