@@ -11,3 +11,4 @@ resources:
   - ingress.yaml
   - networkpolicy.yaml
   - certificate.yaml
+  - certificate-redirect.yaml
