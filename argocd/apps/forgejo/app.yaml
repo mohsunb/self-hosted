@@ -23,8 +23,6 @@ spec:
           config:
             admin:
               DISABLE_REGULAR_ORG_CREATION: true
-            security:
-              SECRET_KEY: ""
             database:
               DB_TYPE: postgres
             queue:
