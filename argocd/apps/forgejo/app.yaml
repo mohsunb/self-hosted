@@ -17,7 +17,8 @@ spec:
         service:
           http:
             extraPorts:
-              - port: 8080
+              - name: anubis
+                port: 8080
           ssh:
             type: LoadBalancer
         gitea:
