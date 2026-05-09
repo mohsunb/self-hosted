@@ -21,6 +21,8 @@ spec:
           admin:
             username: ""
           config:
+            admin:
+              DISABLE_REGULAR_ORG_CREATION: true
             security:
               SECRET_KEY: ""
             database:
@@ -35,6 +37,8 @@ spec:
               DOMAIN: forge.mohsun.az
               ROOT_URL: https://forge.mohsun.az
               SSH_DOMAIN: forge.mohsun.az
+            repository:
+              MAX_CREATION_LIMIT: 0
             repository.signing:
               FORMAT: ssh
               SIGNING_KEY: /data/git/.ssh-signing/key.pub
