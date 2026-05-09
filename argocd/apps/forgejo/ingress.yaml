@@ -38,7 +38,7 @@ spec:
       match: Host(`forge.mohsun.az`)
       services:
         - name: forgejo-http
-          port: 3000
+          port: 8080
   tls:
     secretName: forge-mohsun-az-tls
 ---
