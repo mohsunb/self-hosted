@@ -20,8 +20,8 @@ spec:
     - kind: Rule
       match: Host(`forge.mohsun.az`) && !PathPrefix(`/.well-known/acme-challenge/`)
       services:
-        - name: forgejo-http
-          port: 3000
+        - name: noop@internal
+          kind: TraefikService
       middlewares:
         - name: upgrade-scheme
 ---
