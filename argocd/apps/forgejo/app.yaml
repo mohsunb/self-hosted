@@ -16,7 +16,8 @@ spec:
           type: RollingUpdate
         service:
           http:
-            port: 8080
+            extraPorts:
+              - port: 8080
           ssh:
             type: LoadBalancer
         gitea:
