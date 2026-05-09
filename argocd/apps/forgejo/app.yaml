@@ -35,6 +35,7 @@ spec:
               DOMAIN: forge.mohsun.az
               ROOT_URL: https://forge.mohsun.az
               SSH_DOMAIN: forge.mohsun.az
+              SSH_SERVER_USE_PROXY_PROTOCOL: true
             repository.signing:
               FORMAT: ssh
               SIGNING_KEY: /data/git/.ssh-signing/key.pub
