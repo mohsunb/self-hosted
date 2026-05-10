@@ -12,6 +12,10 @@ spec:
       labels:
         app: mollysocket
     spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
       containers:
         - name: mollysocket
           image: ghcr.io/mollyim/mollysocket:latest
@@ -22,6 +26,9 @@ spec:
           envFrom:
             - secretRef:
                 name: vapid
+          volumeMounts:
+            - name: data
+              mountPath: /data
           ports:
             - containerPort: 8020
           startupProbe:
