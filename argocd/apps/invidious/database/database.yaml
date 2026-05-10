@@ -33,3 +33,8 @@ spec:
             key: playlists.sql
           - name: initdb
             key: playlist_videos.sql
+  managed:
+    roles:
+      - name: invidious
+        superuser: true
+        login: true
