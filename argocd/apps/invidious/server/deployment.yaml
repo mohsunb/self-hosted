@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  namespace: invidious
+spec:
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: quay.io/invidious/invidious:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: server-config
+          ports:
+            - containerPort: 3000
+          startupProbe:
+            httpGet:
+              path: /api/v1/stats
+              port: 3000
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/v1/stats
+              port: 3000
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3

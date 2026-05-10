@@ -1,0 +1,35 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: database
+  namespace: invidious
+spec:
+  instances: 1
+  storage:
+    size: 1Gi
+  bootstrap:
+    initdb:
+      database: invidious
+      owner: invidious
+      secret:
+        name: database-credentials
+      postInitApplicationSQLRefs:
+        configMapRefs:
+          - name: initdb
+            key: annotations.sql
+          - name: initdb
+            key: channel_videos.sql
+          - name: initdb
+            key: channels.sql
+          - name: initdb
+            key: nonces.sql
+          - name: initdb
+            key: playlist_videos.sql
+          - name: initdb
+            key: playlists.sql
+          - name: initdb
+            key: session_ids.sql
+          - name: initdb
+            key: users.sql
+          - name: initdb
+            key: videos.sql
