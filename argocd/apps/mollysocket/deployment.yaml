@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mollysocket
+  namespace: mollysocket
+spec:
+  selector:
+    matchLabels:
+      app: mollysocket
+  template:
+    metadata:
+      labels:
+        app: mollysocket
+    spec:
+      containers:
+        - name: mollysocket
+          image: ghcr.io/mollyim/mollysocket:latest
+          envFrom:
+            - secretRef:
+                name: vapid
+          ports:
+            - containerPort: 8020
+          startupProbe:
+            httpGet:
+              path: /discover
+              port: 8020
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            tcpSocket:
+              port: 8020
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /discover
+              port: 8020
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
