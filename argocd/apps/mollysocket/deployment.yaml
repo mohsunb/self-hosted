@@ -15,6 +15,7 @@ spec:
       containers:
         - name: mollysocket
           image: ghcr.io/mollyim/mollysocket:latest
+          imagePullPolicy: Always
           command:
             - mollysocket
             - server
