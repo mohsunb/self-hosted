@@ -15,6 +15,9 @@ spec:
       containers:
         - name: mollysocket
           image: ghcr.io/mollyim/mollysocket:latest
+          command:
+            - mollysocket
+            - server
           envFrom:
             - secretRef:
                 name: vapid
