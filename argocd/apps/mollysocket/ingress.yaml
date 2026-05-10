@@ -1,0 +1,43 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: upgrade-scheme
+  namespace: mollysocket
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mollysocket-http
+  namespace: mollysocket
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`mollysocket.mohsun.az`) && !PathPrefix(`/.well-known/acme-challenge/`)
+      services:
+        - name: noop@internal
+          kind: TraefikService
+      middlewares:
+        - name: upgrade-scheme
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mollysocket-https
+  namespace: mollysocket
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`mollysocket.mohsun.az`)
+      services:
+        - name: mollysocket
+          port: 8020
+  tls:
+    secretName: mollysocket-mohsun-az-tls
