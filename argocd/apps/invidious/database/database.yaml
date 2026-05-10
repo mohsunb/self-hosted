@@ -16,20 +16,20 @@ spec:
       postInitApplicationSQLRefs:
         configMapRefs:
           - name: initdb
-            key: annotations.sql
+            key: channels.sql
+          - name: initdb
+            key: videos.sql
           - name: initdb
             key: channel_videos.sql
           - name: initdb
-            key: channels.sql
-          - name: initdb
-            key: nonces.sql
-          - name: initdb
-            key: playlist_videos.sql
-          - name: initdb
-            key: playlists.sql
+            key: users.sql
           - name: initdb
             key: session_ids.sql
           - name: initdb
-            key: users.sql
+            key: nonces.sql
           - name: initdb
-            key: videos.sql
+            key: annotations.sql
+          - name: initdb
+            key: playlists.sql
+          - name: initdb
+            key: playlist_videos.sql
