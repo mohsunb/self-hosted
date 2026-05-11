@@ -3,5 +3,52 @@
   "extends": [
     "config:recommended",
     ":semanticCommits"
+  ],
+  "argocd": {
+    "managerFilePatterns": [
+      "/argocd/.+/app\\.yaml$/"
+    ]
+  },
+  "kubernetes": {
+    "managerFilePatterns": [
+      "/argocd/.+/deployment\\.yaml$/"
+    ]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "CloudNativePG",
+      "managerFilePatterns": [
+        "/argocd/cnpg/kustomization\\.yaml$/"
+      ],
+      "matchStrings": [
+        "https://github\\.com/(?<depName>cloudnative-pg/cloudnative-pg)/releases/download/v(?<currentValue>[\\d.]+)/cnpg-[\\d.]+\\.ya?ml"
+      ],
+      "autoReplaceStringTemplate": "https://github.com/{{depName}}/releases/download/v{{newValue}}/cnpg-{{newValue}}.yaml",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "description": "Immich",
+      "managerFilePatterns": [
+        "/argocd/apps/immich/app\\.yaml$/"
+      ],
+      "matchStrings": [
+        "tag:\\s*(?<currentValue>v[\\d.]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "ghcr.io/immich-app/immich-server"
+    },
+    {
+      "customType": "regex",
+      "description": "GitHub releases used in Kustomize",
+      "managerFilePatterns": [
+        "/argocd/.+/kustomization\\.yaml$/"
+      ],
+      "matchStrings": [
+        "https://github\\.com/(?<depName>[^/]+/[^/]+)/releases/download/(?<currentValue>v?[\\d.]+)/[a-zA-Z][a-zA-Z-]*\\.ya?ml"
+      ],
+      "datasourceTemplate": "github-releases"
+    }
   ]
 }
