@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: renovate
+  namespace: renovate
+spec:
+  schedule: "0 */6 * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 10
+  successfulJobsHistoryLimit: 1
+  startingDeadlineSeconds: 300
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          volumes:
+            - name: config
+              configMap:
+                name: renovate
+          containers:
+            - name: renovate
+              image: docker.io/renovate/renovate:latest
+              imagePullPolicy: Always
+              envFrom:
+                - secretRef:
+                    name: renovate
+              volumeMounts:
+                - name: config
+                  mountPath: /usr/src/app/config.js
+                  subPath: config.js
+                  readOnly: true
+          restartPolicy: Never
