@@ -1,4 +1,7 @@
 # My self-hosted services
+
+**TODO**: Document Kubernetes setup @mohsunb
+
 ## Tools:
 - Caddy (first-class HTTPS support, very simple configuration)
 - Fedora CoreOS (SELinux, immutable, container oriented)
