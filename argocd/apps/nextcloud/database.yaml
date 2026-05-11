@@ -4,7 +4,7 @@ metadata:
   name: database
   namespace: nextcloud
 spec:
-  instances: 1
+  instances: 2
   storage:
     size: 128Mi
   bootstrap:
