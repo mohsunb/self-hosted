@@ -1,5 +1,0 @@
-[Unit]
-Description=ntfy message cache volume
-
-[Volume]
-VolumeName=ntfy-message-cache
