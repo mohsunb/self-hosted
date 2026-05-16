@@ -20,7 +20,7 @@ spec:
                 name: renovate
           containers:
             - name: renovate
-              image: docker.io/renovate/renovate:43.181.0
+              image: docker.io/renovate/renovate:43.181.1
               envFrom:
                 - secretRef:
                     name: renovate
