@@ -11,7 +11,8 @@
   },
   "kubernetes": {
     "managerFilePatterns": [
-      "/argocd/.+/deployment\\.yaml$/"
+      "/argocd/.+/deployment\\.yaml$/",
+      "/argocd/apps/renovate/cronjob\\.yaml$/"
     ]
   },
   "customManagers": [
