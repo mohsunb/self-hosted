@@ -4,7 +4,7 @@ metadata:
   name: renovate
   namespace: renovate
 spec:
-  schedule: "0 */6 * * *"
+  schedule: "0 * * * *"
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 10
   successfulJobsHistoryLimit: 1
@@ -20,8 +20,7 @@ spec:
                 name: renovate
           containers:
             - name: renovate
-              image: docker.io/renovate/renovate:latest
-              imagePullPolicy: Always
+              image: docker.io/renovate/renovate:43.180.3
               envFrom:
                 - secretRef:
                     name: renovate
