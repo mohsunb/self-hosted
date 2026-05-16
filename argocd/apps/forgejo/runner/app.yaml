@@ -11,6 +11,8 @@ spec:
     targetRevision: 0.7.6
     helm:
       releaseName: forgejo-runner
+      valuesObject:
+        knownLastVersion: true
   destination:
     server: https://kubernetes.default.svc
     namespace: forgejo
