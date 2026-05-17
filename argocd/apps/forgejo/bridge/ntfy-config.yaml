@@ -1,0 +1,12 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: ntfy-config
+  namespace: forgejo
+spec:
+  encryptedData:
+    topic: AgA57h4haHJzdw8lh+pBKOs5AOmSqMAWoDc3bIPOes2C1C5iTC2xHeuPnTp898/PKrN2kNeslNXkwltLLpQ++Ot+Q7TPv5u8oJ4GF2uHO6ffBpUuh8Prg7tCrnMECMCFi9/K8WNZFimd+Qw3CSKsI2+8iNHLwQMRYvo0PJfvsnXv0S3087YeMeoaV7ie9nv8nV3qzkm67gbAJlbhnNtyLABa707HmncQRIgXIhByCfLz11CNTdp+ljKGOjJMMFeSh5QiZKtNvv5Vx+RKXMRvltuJGaI+pgX3bTIQa3+w0C9RUZ7GFLJXUdHdAaxlPyvRR6UHdavDf7kKsbBkAfCh9Rw9VnyiuakS7KHAaNtLKaS7eNWIVT7DYWI6Hh9sq23X2++ECs35pw6yewX1aJPzBYfORT7GkNmyg/iTHBei32Fp7/Z55mKAfA1nBONzbLjHTxqI6i8Ejt7+DopBbky41QOmATWKKkMw4IxGMRqRVf7gy3qeP3rBY348I+YkLhC2xdKYgO50GaNzAaWCdBjBJOmO5zIXV6i5A9h6yEoDzn+FT/XJWnKlUkif33kOjqFw/eDwKW4KMz+tbZH8iaIxFDvvSg9sjbT4GHCdfmGRQ3uC8XEt5hIV5G2i/GAHpaxyXwdgDK/XJFqoVIeTh9dez7Siyr3DKV/JjBUtgBvOfaGsiO6x5z/7op2wBND+0zQwvxyaweBvsUnpMhzUp85t5Ja4YBwmDkld4ydrwCzSVPBaCQ==
+  template:
+    metadata:
+      name: ntfy-config
+      namespace: forgejo
