@@ -13,6 +13,9 @@ spec:
       releaseName: forgejo-runner
       valuesObject:
         knownLastVersion: true
+        runner:
+          config:
+            existingInitSecret: runner-init-config
   destination:
     server: https://kubernetes.default.svc
     namespace: forgejo
