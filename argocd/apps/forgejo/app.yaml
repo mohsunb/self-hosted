@@ -50,6 +50,8 @@ spec:
               DEFAULT_TRUST_MODEL: pubkey
               CRUD_ACTIONS: pubkey
               MERGES: pubkey
+            webhook:
+              ALLOWED_HOST_LIST: 10.43.0.0/16
           additionalConfigFromEnvs:
             - name: FORGEJO__DATABASE__HOST
               valueFrom:
