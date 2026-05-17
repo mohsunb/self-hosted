@@ -15,7 +15,11 @@ spec:
         knownLastVersion: true
         runner:
           config:
-            existingInitSecret: runner-init-config
+            instance: https://forge.mohsun.az
+            name: main-runner
+            # NOTE: this is for testing purposes
+            # TODO: delete in production
+            token: 82b40e3fb8efbf5dc3fab890fc08d9862be6eee0
   destination:
     server: https://kubernetes.default.svc
     namespace: forgejo
