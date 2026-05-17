@@ -50,6 +50,17 @@
         "https://github\\.com/(?<depName>[^/]+/[^/]+)/releases/download/(?<currentValue>v?[\\d.]+)/[a-zA-Z][a-zA-Z-]*\\.ya?ml"
       ],
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/argocd/apps/immich/database\\.yaml$/"
+      ],
+      "matchStrings": [
+        "image:\\s*(?<depName>ghcr\\.io/tensorchord/cloudnative-vectorchord):(?<currentValue>[0-9.-]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "regex:^(?<compatibility>\\d+)\\.(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
     }
   ]
 }
