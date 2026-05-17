@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bridge
-          image: forge.mohsun.az/mohsunb/forgejo-ntfy-bridge:0.1.0
+          image: forge.mohsun.az/mohsunb/forgejo-ntfy-bridge:0.1.1
           env:
             - name: NTFY_URL
               value: https://push.mohsun.az
