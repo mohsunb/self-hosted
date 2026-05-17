@@ -13,4 +13,3 @@ resources:
   - networkpolicy.yaml
   - certificate.yaml
   - certificate-old.yaml
-  - runner
