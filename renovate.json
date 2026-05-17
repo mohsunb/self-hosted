@@ -57,7 +57,7 @@
         "/argocd/apps/immich/database\\.yaml$/"
       ],
       "matchStrings": [
-        "image:\\s*(?<depName>ghcr\\.io/tensorchord/cloudnative-vectorchord):(?<currentValue>[0-9.-]+)"
+        "imageName:\\s*(?<depName>ghcr\\.io/tensorchord/cloudnative-vectorchord):(?<currentValue>[0-9.-]+)"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "regex:^(?<compatibility>\\d+)\\.(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
