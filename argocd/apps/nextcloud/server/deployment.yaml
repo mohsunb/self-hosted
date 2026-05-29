@@ -18,7 +18,7 @@ spec:
             claimName: data
       containers:
         - name: nextcloud
-          image: docker.io/nextcloud:33.0.3
+          image: docker.io/nextcloud:33.0.4
           env:
             - name: REDIS_HOST
               value: valkey
