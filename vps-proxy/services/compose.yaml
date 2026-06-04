@@ -5,7 +5,7 @@ volumes:
 
 services:
   caddy:
-    image: docker.io/caddy:2.11.3
+    image: docker.io/caddy:2.11.4
     restart: unless-stopped
     ports:
       - "1080:80"
