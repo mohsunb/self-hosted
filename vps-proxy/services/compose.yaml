@@ -6,6 +6,7 @@ volumes:
 services:
   caddy:
     image: docker.io/caddy:2.11.4
+    container_name: caddy
     restart: unless-stopped
     ports:
       - "1080:80"
@@ -37,13 +38,14 @@ services:
 
   uptime-kuma:
     image: docker.io/louislam/uptime-kuma:2.4.0
+    container_name: uptime-kuma
     restart: unless-stopped
     volumes:
       - ./data/uptime-kuma:/app/data:Z
     extra_hosts:
       - "push.mohsun.az:host-gateway"
       - "forge.mohsun.az:host-gateway"
-      - "vault.mohsun.az:host-gateway"
+      - "vault.mohsun.az:192.168.3.2"
       - "gallery.mohsun.az:host-gateway"
       - "sync.mohsun.az:host-gateway"
       - "track.mohsun.az:host-gateway"
