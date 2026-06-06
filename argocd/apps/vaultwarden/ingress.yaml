@@ -18,7 +18,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`vault.mohsun.az`) && !PathPrefix(`/.well-known/acme-challenge/`)
+      match: Host(`vault.mohsun.az`)
       services:
         - name: server
           port: 80
