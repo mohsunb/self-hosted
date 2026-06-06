@@ -45,7 +45,7 @@ services:
     extra_hosts:
       - "push.mohsun.az:host-gateway"
       - "forge.mohsun.az:host-gateway"
-      - "vault.mohsun.az:host-gateway"
+      - "vault.mohsun.az:192.168.3.2"
       - "gallery.mohsun.az:host-gateway"
       - "sync.mohsun.az:host-gateway"
       - "track.mohsun.az:host-gateway"
