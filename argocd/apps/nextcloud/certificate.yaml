@@ -4,9 +4,9 @@ metadata:
   name: nextcloud
   namespace: nextcloud
 spec:
-  secretName: sync-mohsun-az-tls
+  secretName: cloud-mohsun-az-tls
   dnsNames:
-    - "sync.mohsun.az"
+    - "cloud.mohsun.az"
   issuerRef:
     name: letsencrypt-issuer
     kind: ClusterIssuer

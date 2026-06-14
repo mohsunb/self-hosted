@@ -7,4 +7,5 @@ resources:
   - cache
   - server
   - networkpolicy.yaml
+  - ingress.yaml
   - certificate.yaml
