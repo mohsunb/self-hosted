@@ -38,7 +38,7 @@ spec:
               port: 80
               httpHeaders:
                 - name: Host
-                  value: sync.mohsun.az
+                  value: cloud.mohsun.az
             periodSeconds: 10
             failureThreshold: 30
           livenessProbe:
@@ -47,7 +47,7 @@ spec:
               port: 80
               httpHeaders:
                 - name: Host
-                  value: sync.mohsun.az
+                  value: cloud.mohsun.az
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
