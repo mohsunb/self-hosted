@@ -39,10 +39,10 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`sync.mohsun.az`) && !PathPrefix(`/.well-known/acme-challenge/`)
+      match: Host(`cloud.mohsun.az`) && !PathPrefix(`/.well-known/acme-challenge/`)
       services:
-        - name: server
-          port: 80
+        - name: noop@internal
+          kind: TraefikService
       middlewares:
         - name: upgrade-scheme
 ---
@@ -56,7 +56,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`sync.mohsun.az`)
+      match: Host(`cloud.mohsun.az`)
       services:
         - name: server
           port: 80
@@ -64,4 +64,4 @@ spec:
         - name: redirects
         - name: hsts-header
   tls:
-    secretName: sync-mohsun-az-tls
+    secretName: cloud-mohsun-az-tls
