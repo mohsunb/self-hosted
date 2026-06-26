@@ -52,7 +52,7 @@ services:
       - "tunnel.mohsun.az:host-gateway"
 
   headscale:
-    image: docker.io/headscale/headscale:v0.28.0
+    image: docker.io/headscale/headscale:v0.29.1
     restart: unless-stopped
     container_name: headscale
     read_only: true
