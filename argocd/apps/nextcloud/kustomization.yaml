@@ -6,3 +6,5 @@ resources:
   - database.yaml
   - cache
   - server
+  - gateway.yaml
+  - route.yaml
