@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: valkey-sentinel
+  namespace: nextcloud
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: valkey-sentinel
+  template:
+    metadata:
+      labels:
+        app: valkey-sentinel
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: valkey-sentinel
+      containers:
+        - name: valkey-sentinel
+          image: docker.io/valkey/valkey:latest
+          command: ["sh", "/tmp/entrypoint.sh"]
+          env:
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: password
+          ports:
+            - containerPort: 26379
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: config
+              mountPath: /etc/valkey/sentinel.conf.tpl
+              subPath: sentinel.conf.tpl
+              readOnly: true
+            - name: config
+              mountPath: /tmp/entrypoint.sh
+              subPath: entrypoint.sh
+              readOnly: true
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "valkey-cli -p 26379 -a \"$VALKEY_PASSWORD\" --no-auth-warning PING | grep -q PONG"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: config
+          configMap:
+            name: valkey-sentinel
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs-csi
+        resources:
+          requests:
+            storage: 64Mi

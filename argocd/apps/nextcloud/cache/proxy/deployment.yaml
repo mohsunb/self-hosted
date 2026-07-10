@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valkey-proxy
+  namespace: nextcloud
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: valkey-proxy
+  template:
+    metadata:
+      labels:
+        app: valkey-proxy
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: valkey-proxy
+      containers:
+        - name: haproxy
+          image: docker.io/haproxy:latest
+          env:
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: password
+          ports:
+            - name: valkey
+              containerPort: 6379
+          volumeMounts:
+            - name: config
+              mountPath: /usr/local/etc/haproxy/haproxy.cfg
+              subPath: haproxy.cfg
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 3
+            periodSeconds: 5
+      volumes:
+        - name: config
+          configMap:
+            name: valkey-proxy

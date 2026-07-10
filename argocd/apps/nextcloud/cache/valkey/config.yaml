@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: valkey
+  namespace: nextcloud
+data:
+  entrypoint.sh: |
+    #!/bin/sh
+    set -e
+
+    SENTINEL_SVC="valkey-sentinel"
+    SENTINEL_PORT="26379"
+    MASTER_NAME="mymaster"
+    MY_HOST="$(hostname)"
+    MY_ORDINAL="${MY_HOST##*-}"
+
+    echo "[entrypoint] pod=$MY_HOST ordinal=$MY_ORDINAL ip=$POD_IP"
+
+    if [ -z "$VALKEY_PASSWORD" ]; then
+      echo "[entrypoint] password cannot be empty"
+      exit 1
+    fi
+
+    get_master_ip() {
+      valkey-cli -h "$SENTINEL_SVC" -p "$SENTINEL_PORT" -a "$VALKEY_PASSWORD" --no-auth-warning sentinel get-master-addr-by-name "$MASTER_NAME" | head -n 1
+    }
+
+    MASTER_IP=""
+    i=0
+    while [ "$i" -lt 10 ]; do
+      MASTER_IP="$(get_master_ip || true)"
+      [ -n "$MASTER_IP" ] && break
+      i=$((i + 1))
+      echo "[entrypoint] sentinel has no opinion yet, retry $i/10"
+      sleep 3
+    done
+
+    echo "requirepass $VALKEY_PASSWORD" >> /tmp/valkey.conf
+
+    if [ -z "$MASTER_IP" ]; then
+      if [ "$MY_ORDINAL" = "0" ]; then
+        echo "[entrypoint] no master known anywhere yet; bootstrapping as MASTER"
+      else
+        echo "[entrypoint] no master known yet; falling back to replicaof valkey-0"
+        echo "replicaof valkey-0.valkey-headless 6379" >> /tmp/valkey.conf
+        echo "primaryauth $VALKEY_PASSWORD" >> /tmp/valkey.conf
+      fi
+    elif [ "$MASTER_IP" = "$POD_IP" ]; then
+      echo "[entrypoint] sentinel confirms I am already MASTER"
+    else
+      echo "[entrypoint] sentinel says master is $MASTER_IP; starting as REPLICA"
+      echo "replicaof $MASTER_IP 6379" >> /tmp/valkey.conf
+      echo "primaryauth $VALKEY_PASSWORD" >> /tmp/valkey.conf
+    fi
+
+    exec valkey-server /tmp/valkey.conf
