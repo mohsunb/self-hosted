@@ -22,5 +22,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
       syncPolicy:
+        syncOptions:
+          - ServerSideApply={{default "false" serverSideApply}}
         automated:
           enabled: true
