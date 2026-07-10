@@ -1,7 +1,0 @@
-tunnel.mohsun.az {
-        reverse_proxy headscale:8080
-
-        # log {
-        #         output file /var/log/caddy/headscale/access.log
-        # }
-}

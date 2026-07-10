@@ -1,7 +1,0 @@
-status.mohsun.az {
-        reverse_proxy uptime-kuma:3001
-
-        # log {
-        #         output file /var/log/caddy/uptime-kuma/access.log
-        # }
-}
