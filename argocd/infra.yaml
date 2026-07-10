@@ -13,13 +13,13 @@ spec:
           - path: argocd/infra/*/argocd.json
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{.path.basename}}'
     spec:
       project: default
       source:
         repoURL: https://forge.mohsun.az/mohsunb/self-hosted.git
         targetRevision: development
-        path: '{{path}}'
+        path: '{{.path}}'
       destination:
         server: https://kubernetes.default.svc
       syncPolicy:
