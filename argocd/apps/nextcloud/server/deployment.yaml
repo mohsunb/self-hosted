@@ -42,22 +42,22 @@ spec:
               mountPath: /var/www/html
           ports:
             - containerPort: 80
-          # startupProbe:
-          #   httpGet:
-          #     path: /heartbeat
-          #     port: 80
-          #     httpHeaders:
-          #       - name: Host
-          #         value: nextcloud.test.mohsun.az
-          #   periodSeconds: 10
-          #   failureThreshold: 30
-          # livenessProbe:
-          #   httpGet:
-          #     path: /heartbeat
-          #     port: 80
-          #     httpHeaders:
-          #       - name: Host
-          #         value: nextcloud.test.mohsun.az
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /heartbeat
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: nextcloud.test.mohsun.az
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: nextcloud.test.mohsun.az
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
