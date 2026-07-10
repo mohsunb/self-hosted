@@ -19,7 +19,7 @@ spec:
       source:
         repoURL: https://forge.mohsun.az/mohsunb/self-hosted.git
         targetRevision: development
-        path: '{{.path}}'
+        path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
       syncPolicy:
