@@ -1,0 +1,25 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: ha-config
+  namespace: envoy-gateway-system
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyDeployment:
+        replicas: 2
+        pod:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: kubernetes.io/hostname
+                  labelSelector:
+                    matchLabels:
+                      app.kubernetes.io/managed-by: envoy-gateway
+                      app.kubernetes.io/component: proxy
+                  matchLabelKeys:
+                    - gateway.envoyproxy.io/owning-gateway-name
+                    - gateway.envoyproxy.io/owning-gateway-namespace
+      envoyPDB:
+        minAvailable: 1
