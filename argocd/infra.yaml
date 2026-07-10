@@ -8,8 +8,8 @@ spec:
     - git:
         repoURL: https://forge.mohsun.az/mohsunb/self-hosted.git
         revision: development
-        directories:
-          - path: argocd/infra/*
+        files:
+          - path: argocd/infra/*/argocd.json
   template:
     metadata:
       name: '{{path.basename}}'
