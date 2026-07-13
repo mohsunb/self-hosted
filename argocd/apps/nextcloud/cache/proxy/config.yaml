@@ -31,5 +31,5 @@ data:
       tcp-check expect string role:master
       tcp-check send QUIT\r\n
       tcp-check expect string +OK
-      server valkey-0 valkey-0.valkey-headless:6379 check inter 1s fall 1 rise 1 resolvers k8s init-addr last,none
-      server valkey-1 valkey-1.valkey-headless:6379 check inter 1s fall 1 rise 1 resolvers k8s init-addr last,none
+      server valkey-0 valkey-0.valkey-headless:6379 check inter 1s fall 1 rise 1 resolvers k8s
+      server valkey-1 valkey-1.valkey-headless:6379 check inter 1s fall 1 rise 1 resolvers k8s
