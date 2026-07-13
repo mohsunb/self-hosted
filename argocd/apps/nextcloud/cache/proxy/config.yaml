@@ -14,6 +14,11 @@ data:
       timeout client 30s
       timeout server 30s
 
+    resolvers k8s
+      parse-resolv-conf
+      hold valid 1s
+      hold obsolete 1s
+
     listen valkey
       bind *:6379
       option tcp-check
@@ -26,5 +31,5 @@ data:
       tcp-check expect string role:master
       tcp-check send QUIT\r\n
       tcp-check expect string +OK
-      server valkey-0 valkey-0.valkey-headless:6379 check inter 1s fall 1 rise 1
-      server valkey-1 valkey-1.valkey-headless:6379 check inter 1s fall 1 rise 1
+      server valkey-0 valkey-0.valkey-headless:6379 check inter 1s fall 1 rise 1 resolvers k8s resolve-prefer ipv4 init-addr none
+      server valkey-1 valkey-1.valkey-headless:6379 check inter 1s fall 1 rise 1 resolvers k8s resolve-prefer ipv4 init-addr none
