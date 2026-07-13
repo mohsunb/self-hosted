@@ -44,6 +44,11 @@ spec:
               mountPath: /tmp/entrypoint.sh
               subPath: entrypoint.sh
               readOnly: true
+          startupProbe:
+            exec:
+              command: ["sh", "-c", "valkey-cli -a \"$VALKEY_PASSWORD\" --no-auth-warning PING | grep -q PONG"]
+            initialDelaySeconds: 30
+            periodSeconds: 5
           livenessProbe:
             exec:
               command: ["sh", "-c", "valkey-cli -a \"$VALKEY_PASSWORD\" --no-auth-warning PING | grep -q PONG"]
