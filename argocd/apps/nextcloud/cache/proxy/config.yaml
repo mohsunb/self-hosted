@@ -16,7 +16,11 @@ data:
 
     resolvers k8s
       parse-resolv-conf
-      hold valid 1s
+      hold valid    1s
+      hold other    1s
+      hold refused  1s
+      hold nx       1s
+      hold timeout  1s
       hold obsolete 1s
 
     listen valkey
