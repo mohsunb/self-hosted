@@ -13,6 +13,7 @@ data:
       timeout connect 3s
       timeout client 30s
       timeout server 30s
+      log global
 
     resolvers k8s
       parse-resolv-conf
@@ -24,6 +25,7 @@ data:
 
     listen valkey
       bind *:6379
+      option log-health-checks
       option tcp-check
       tcp-check connect
       tcp-check send "AUTH ${VALKEY_PASSWORD}\r\n"
