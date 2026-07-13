@@ -17,7 +17,10 @@ data:
     resolvers k8s
       parse-resolv-conf
       hold valid  2s
-      hold nx     1s
+
+      resolve_retries 10
+      timeout resolve 1s
+      timeout retry   1s
 
     listen valkey
       bind *:6379
