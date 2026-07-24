@@ -18,7 +18,7 @@ spec:
             claimName: data
       containers:
         - name: vaulwarden
-          image: docker.io/vaultwarden/server:1.36.0
+          image: docker.io/vaultwarden/server:1.37.0
           envFrom:
             - secretRef:
                 name: database-config
