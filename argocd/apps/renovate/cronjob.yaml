@@ -20,7 +20,7 @@ spec:
                 name: renovate
           containers:
             - name: renovate
-              image: docker.io/renovate/renovate:43
+              image: docker.io/renovate/renovate:44
               imagePullPolicy: Always
               envFrom:
                 - secretRef:
