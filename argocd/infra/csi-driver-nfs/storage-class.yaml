@@ -6,7 +6,7 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 172.31.1.4
+  server: 192.168.1.5
   share: /media/nfs/kubernetes
   subDir: "${pvc.metadata.namespace}-${pvc.metadata.name}"
 reclaimPolicy: Delete
