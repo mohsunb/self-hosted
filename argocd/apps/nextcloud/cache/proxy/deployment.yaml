@@ -21,10 +21,14 @@ spec:
                 matchLabels:
                   app: valkey-proxy
       containers:
-        - name: haproxy
-          image: docker.io/haproxy:latest
+        - name: valkey-proxy
+          image: forge.mohsun.az/mohsunb/valkey-proxy:0.2.0
           env:
-            - name: VALKEY_PASSWORD
+            - name: PRIMARY_INSTANCE_ADDRESS
+              value: valkey-0.valkey-headless:6379
+            - name: SENTINEL_ADDRESS
+              value: valkey-sentinel:26379
+            - name: SENTINEL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: valkey
@@ -32,16 +36,8 @@ spec:
           ports:
             - name: valkey
               containerPort: 6379
-          volumeMounts:
-            - name: config
-              mountPath: /usr/local/etc/haproxy/haproxy.cfg
-              subPath: haproxy.cfg
           livenessProbe:
             tcpSocket:
               port: 6379
             initialDelaySeconds: 3
             periodSeconds: 5
-      volumes:
-        - name: config
-          configMap:
-            name: valkey-proxy
