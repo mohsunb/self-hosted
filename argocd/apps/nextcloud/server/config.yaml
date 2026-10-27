@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server
+  namespace: nextcloud
+data:
+  kubernetes.config.php: |
+    <?php
+    $CONFIG = array (
+      # database
+      'dbtype' => 'pgsql',
+      'dbhost' => getenv('POSTGRES_HOST'),
+      'dbname' => getenv('POSTGRES_DB'),
+      'dbuser' => getenv('POSTGRES_USER'),
+      'dbpassword' => getenv('POSTGRES_PASSWORD'),
+
+      # misc
+      'trusted_domains' =>
+      array (
+        0 => 'localhost',
+        1 => getenv('SERVER_HOST')
+      )
+    );

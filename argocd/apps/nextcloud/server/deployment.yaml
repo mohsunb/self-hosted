@@ -24,6 +24,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+        - name: config
+          configMap:
+            name: server
       containers:
         - name: nextcloud
           image: docker.io/nextcloud:34.0.1
@@ -35,29 +38,47 @@ spec:
                 secretKeyRef:
                   name: valkey
                   key: password
-            - name: NEXTCLOUD_TRUSTED_DOMAINS
+            - name: SERVER_HOST
               value: nextcloud.test.mohsun.az
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: host
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: dbname
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: password
           volumeMounts:
             - name: data
               mountPath: /var/www/html
+            - name: config
+              subPath: kubernetes.config.php
+              mountPath: /var/www/html/config/kubernetes.config.php
+              readOnly: true
           ports:
             - containerPort: 80
-          # startupProbe:
-          #   httpGet:
-          #     path: /heartbeat
-          #     port: 80
-          #     httpHeaders:
-          #       - name: Host
-          #         value: nextcloud.test.mohsun.az
-          #   periodSeconds: 10
-          #   failureThreshold: 30
-          # livenessProbe:
-          #   httpGet:
-          #     path: /heartbeat
-          #     port: 80
-          #     httpHeaders:
-          #       - name: Host
-          #         value: nextcloud.test.mohsun.az
-          #   periodSeconds: 10
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /heartbeat
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 80
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
