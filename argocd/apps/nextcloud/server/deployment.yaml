@@ -64,8 +64,8 @@ spec:
             - name: data
               mountPath: /var/www/html
             - name: config
-              subPath: kubernetes.config.php
               mountPath: /var/www/html/config/kubernetes.config.php
+              subPath: kubernetes.config.php
               readOnly: true
           ports:
             - containerPort: 80
