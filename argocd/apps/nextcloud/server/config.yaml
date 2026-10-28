@@ -17,7 +17,8 @@ data:
       # misc
       'trusted_domains' =>
       array (
-        0 => getenv('NEXTCLOUD_TRUSTED_DOMAINS')
+        0 => 'localhost',
+        1 => getenv('NEXTCLOUD_TRUSTED_DOMAINS')
       )
     );
   init.sh: |
