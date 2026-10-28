@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Statefulset
 metadata:
   name: server
   namespace: nextcloud
@@ -79,6 +79,8 @@ spec:
               value: admin
             - name: NEXTCLOUD_ADMIN_PASSWORD
               value: admin
+            - name: NEXTCLOUD_TRUSTED_DOMAINS
+              value: nextcloud.test.mohsun.az
           volumeMounts:
             - name: data
               mountPath: /var/www/html
@@ -90,7 +92,7 @@ spec:
               port: 80
               httpHeaders:
                 - name: Host
-                  value: localhost
+                  value: nextcloud.test.mohsun.az
             periodSeconds: 10
             failureThreshold: 60
           livenessProbe:
@@ -99,7 +101,7 @@ spec:
               port: 80
               httpHeaders:
                 - name: Host
-                  value: localhost
+                  value: nextcloud.test.mohsun.az
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
