@@ -75,6 +75,10 @@ spec:
                 secretKeyRef:
                   name: database-app
                   key: password
+            - name: NEXTCLOUD_ADMIN_USER
+              value: admin
+            - name: NEXTCLOUD_ADMIN_PASSWORD
+              value: admin
           volumeMounts:
             - name: data
               mountPath: /var/www/html
