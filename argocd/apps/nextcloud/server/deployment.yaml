@@ -35,8 +35,8 @@ spec:
             - name: data
               mountPath: /var/www/html
             - name: config
-              mountPath: /tmp/kubernetes.config.php
-              subPath: kubernetes.config.php
+              mountPath: /tmp/zz-kubernetes.config.php
+              subPath: zz-kubernetes.config.php
               readOnly: true
             - name: config
               mountPath: /tmp/init.sh
