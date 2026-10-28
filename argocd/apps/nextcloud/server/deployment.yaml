@@ -32,6 +32,8 @@ spec:
           image: docker.io/bash:5
           command: ["sh", "/tmp/init.sh"]
           volumeMounts:
+            - name: data
+              mountPath: /var/www/html
             - name: config
               mountPath: /tmp/kubernetes.config.php
               subPath: kubernetes.config.php
