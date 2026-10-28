@@ -16,10 +16,12 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: kubernetes.io/hostname
-              labelSelector:
-                matchLabels:
-                  app: valkey-proxy
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: valkey-proxy
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: valkey-proxy
           image: forge.mohsun.az/mohsunb/valkey-proxy:0.2.0
