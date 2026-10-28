@@ -21,3 +21,18 @@ data:
         1 => getenv('SERVER_HOST')
       )
     );
+  init.sh: |
+    #!/usr/bin/env bash
+
+    if [[ -d /var/www/html/config ]]; then
+      if [[ -f /tmp/zz-kubernetes.config.php ]]; then
+        cp -v /tmp/zz-kubernetes.config.php /var/www/html/config;
+        chown -c 33:33 /var/www/html/config/zz-kubernetes.config.php;
+        echo "Nextcloud Kubernetes configuration was set up successfully.";
+      else
+        echo "Nextcloud Kubernetes configuration file is not mounted properly.";
+        exit 1;
+      fi
+    else
+      echo "Nextcloud is being installed for the first time, nothing to initialize.";
+    fi

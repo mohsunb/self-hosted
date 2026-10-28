@@ -27,6 +27,19 @@ spec:
         - name: config
           configMap:
             name: server
+      initContainers:
+        - name: k8s-config
+          image: docker.io/bash:5
+          command: ["sh", "/tmp/init.sh"]
+          volumeMounts:
+            - name: config
+              mountPath: /tmp/kubernetes.config.php
+              subPath: kubernetes.config.php
+              readOnly: true
+            - name: config
+              mountPath: /tmp/init.sh
+              subPath: init.sh
+              readOnly: true
       containers:
         - name: nextcloud
           image: docker.io/nextcloud:34.0.1
