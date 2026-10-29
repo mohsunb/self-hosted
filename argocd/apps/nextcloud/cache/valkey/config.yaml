@@ -36,6 +36,7 @@ data:
     done
 
     echo "requirepass $VALKEY_PASSWORD" >> /tmp/valkey.conf
+    echo "replica-announce-ip ${MY_HOST}.valkey-headless" >> /tmp/valkey.conf
 
     if [ -z "$MASTER_IP" ]; then
       if [ "$MY_ORDINAL" = "0" ]; then
@@ -45,7 +46,7 @@ data:
         echo "replicaof valkey-0.valkey-headless 6379" >> /tmp/valkey.conf
         echo "primaryauth $VALKEY_PASSWORD" >> /tmp/valkey.conf
       fi
-    elif [ "$MASTER_IP" = "$POD_IP" ]; then
+    elif [ "$MASTER_IP" = "$MY_HOST.valkey-headless" ]; then
       echo "[entrypoint] sentinel confirms I am already MASTER"
     else
       echo "[entrypoint] sentinel says master is $MASTER_IP; starting as REPLICA"
