@@ -5,6 +5,7 @@ metadata:
   namespace: nextcloud
 spec:
   clusterIP: None
+  publishNotReadyAddresses: true
   selector:
     app: valkey
   ports:
