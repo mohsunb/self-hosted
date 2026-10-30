@@ -20,7 +20,7 @@ services:
       - caddy_config:/config:Z
 
   ntfy:
-    image: docker.io/binwiederhier/ntfy:v2.30.0
+    image: docker.io/binwiederhier/ntfy:v2.35.0
     container_name: ntfy
     command:
       - serve
