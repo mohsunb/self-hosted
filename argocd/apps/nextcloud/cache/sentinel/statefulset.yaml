@@ -4,6 +4,7 @@ metadata:
   name: valkey-sentinel
   namespace: nextcloud
 spec:
+  serviceName: valkey-sentinel-headless
   replicas: 3
   selector:
     matchLabels:
