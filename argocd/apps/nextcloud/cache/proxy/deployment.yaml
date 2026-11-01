@@ -24,7 +24,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: valkey-proxy
-          image: forge.mohsun.az/mohsunb/valkey-proxy:0.5.0
+          image: forge.mohsun.az/mohsunb/valkey-proxy:0.6.0
           env:
             - name: SENTINEL_ADDRESS
               value: valkey-sentinel:26379
@@ -35,6 +35,8 @@ spec:
                   key: password
             - name: SENTINEL_MASTER_SET_NAME
               value: mymaster
+            - name: SENTINEL_REFRESH_INTERVAL_SECONDS
+              value: 10
           ports:
             - name: valkey
               containerPort: 6379
