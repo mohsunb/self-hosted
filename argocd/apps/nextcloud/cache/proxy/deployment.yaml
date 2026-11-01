@@ -27,7 +27,7 @@ spec:
           image: forge.mohsun.az/mohsunb/valkey-proxy:0.8.1
           env:
             - name: SENTINEL_ADDRESS
-              value: valkey-sentinel:26379
+              value: valkey-sentinel-headless:26379
             - name: SENTINEL_PASSWORD
               valueFrom:
                 secretKeyRef:
