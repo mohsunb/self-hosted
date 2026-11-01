@@ -35,6 +35,10 @@ spec:
                   key: password
             - name: SENTINEL_MASTER_SET_NAME
               value: mymaster
+            - name: SENTINEL_REFRESH_INTERVAL_SECONDS
+              value: "1"
+            - name: LOG_LEVEL
+              value: debug
           ports:
             - name: valkey
               containerPort: 6379
