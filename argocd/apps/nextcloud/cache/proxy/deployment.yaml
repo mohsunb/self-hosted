@@ -24,7 +24,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: valkey-proxy
-          image: forge.mohsun.az/mohsunb/valkey-proxy:0.8.0
+          image: forge.mohsun.az/mohsunb/valkey-proxy:0.8.1
           env:
             - name: SENTINEL_ADDRESS
               value: valkey-sentinel:26379
