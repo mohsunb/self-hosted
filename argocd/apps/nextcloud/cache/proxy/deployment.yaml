@@ -13,22 +13,15 @@ spec:
       labels:
         app: valkey-proxy
     spec:
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app: valkey-proxy
-      # affinity:
-      #   podAntiAffinity:
-      #     preferredDuringSchedulingIgnoredDuringExecution:
-      #       - weight: 100
-      #         podAffinityTerm:
-      #           labelSelector:
-      #             matchLabels:
-      #               app: valkey-proxy
-      #           topologyKey: kubernetes.io/hostname
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: valkey-proxy
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: valkey-proxy
           image: forge.mohsun.az/mohsunb/valkey-proxy:0.8.1
