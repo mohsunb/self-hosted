@@ -16,7 +16,7 @@ spec:
             value: /
       backendRefs:
         - name: forgejo-http
-          port: 8080
+          port: 3000
       filters:
         - type: RequestHeaderModifier
           requestHeaderModifier:
