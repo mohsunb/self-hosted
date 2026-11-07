@@ -7,7 +7,7 @@ data:
   prepare.sh: |
     #!/bin/sh
 
-    if [ -z $DATABASE_USERNAME || -z $DATABASE_PASSWORD || -z $DATABASE_HOST || -z $DATABASE_NAME || -z $DATABASE_URL_FILE ]; then
+    if [ -z $DATABASE_USERNAME ] || [ -z $DATABASE_PASSWORD ] || [ -z $DATABASE_HOST ] || [ -z $DATABASE_NAME ] || [ -z $DATABASE_URL_FILE ]; then
             echo "Not all of the following environment variables are set: DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME, DATABASE_URL_FILE";
             exit 1;
     fi
@@ -15,3 +15,4 @@ data:
     URL_ENCODED_PASSWORD=$(python -c "from urllib.parse import quote; print(quote('$DATABASE_PASSWORD'))")
 
     echo -n "postgresql://$DATABASE_USERNAME:$URL_ENCODED_PASSWORD@$DATABASE_HOST:${DATABASE_PORT:-5432}/$DATABASE_NAME" > $DATABASE_URL_FILE
+    echo "Prepared database URL file for Vaultwarden"
