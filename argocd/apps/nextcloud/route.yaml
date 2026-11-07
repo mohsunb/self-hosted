@@ -8,7 +8,7 @@ spec:
     - name: default
       namespace: kube-system
   hostnames:
-    - "nextcloud.test.isshin-k8s.local"
+    - "nextcloud.test.mohsun.az"
   rules:
     - matches:
         - path:
