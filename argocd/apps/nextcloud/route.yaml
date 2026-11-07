@@ -20,3 +20,12 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      retry:
+        attempts: 10
+        codes:
+          - 500
+          - 503
+        backoff: 100ms
+      timeouts:
+        request: 10s
+        backendRequest: 5s
