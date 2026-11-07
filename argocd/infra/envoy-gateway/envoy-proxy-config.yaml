@@ -9,16 +9,18 @@ spec:
     kubernetes:
       envoyDeployment:
         replicas: 2
+        strategy:
+          rollingUpdate:
+            maxSurge: 0
+            maxUnavailable: 1
         pod:
           affinity:
             podAntiAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - weight: 100
-                  podAffinityTerm:
-                    topologyKey: kubernetes.io/hostname
-                    labelSelector:
-                      matchLabels:
-                        app.kubernetes.io/managed-by: envoy-gateway
-                        app.kubernetes.io/component: proxy
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: kubernetes.io/hostname
+                  labelSelector:
+                    matchLabels:
+                      app.kubernetes.io/managed-by: envoy-gateway
+                      app.kubernetes.io/component: proxy
       envoyPDB:
         minAvailable: 1
