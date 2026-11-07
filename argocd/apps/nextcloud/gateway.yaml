@@ -12,5 +12,6 @@ spec:
       allowedRoutes:
         namespaces:
           from: Selector
-          matchLabels:
-            shared-gateway-access: "true"
+          selector:
+            matchLabels:
+              shared-gateway-access: "true"
