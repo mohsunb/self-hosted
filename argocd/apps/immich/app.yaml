@@ -49,8 +49,6 @@ spec:
           persistence:
             library:
               existingClaim: library
-        valkey:
-          enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: immich
