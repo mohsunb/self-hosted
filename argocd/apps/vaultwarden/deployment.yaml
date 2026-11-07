@@ -36,7 +36,7 @@ spec:
       initContainers:
         - name: prepare
           image: docker.io/python:3
-          command: ["bash", "/tmp/prepare.sh"]
+          command: ["sh", "/tmp/prepare.sh"]
           env:
             - name: DATABASE_USERNAME
               valueFrom:
