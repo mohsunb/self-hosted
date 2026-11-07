@@ -37,6 +37,8 @@ spec:
         - name: prepare
           image: docker.io/python:3
           command: ["/tmp/scripts/prepare.sh"]
+          securityContext:
+            runAsUser: 0
           env:
             - name: DATABASE_USERNAME
               valueFrom:
