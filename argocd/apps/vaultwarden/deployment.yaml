@@ -48,7 +48,7 @@ spec:
                 secretKeyRef:
                   name: database-app
                   key: password
-            - name: DATABASE_PASSWORD
+            - name: DATABASE_HOST
               valueFrom:
                 secretKeyRef:
                   name: database-app
