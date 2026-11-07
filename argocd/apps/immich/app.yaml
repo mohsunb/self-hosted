@@ -14,6 +14,19 @@ spec:
       valuesObject:
         controllers:
           main:
+            replicas: 2
+            strategy: Recreate
+            podDisruptionBudget:
+              minAvailable: 1
+            pod:
+              affinity:
+                podAntiAffinity:
+                  requiredDuringSchedulingIgnoredDuringExecution:
+                    - topologyKey: kubernetes.io/hostname
+                      labelSelector:
+                        matchLabels:
+                          app.kubernetes.io/name: immich
+                          app.kubernetes.io/controller: main
             containers:
               main:
                 image:
@@ -45,6 +58,20 @@ spec:
                       secretKeyRef:
                         name: valkey
                         key: ioredis-url
+          machine-learning:
+            replicas: 2
+            strategy: Recreate
+            podDisruptionBudget:
+              minAvailable: 1
+            pod:
+              affinity:
+                podAntiAffinity:
+                  requiredDuringSchedulingIgnoredDuringExecution:
+                    - topologyKey: kubernetes.io/hostname
+                      labelSelector:
+                        matchLabels:
+                          app.kubernetes.io/name: immich
+                          app.kubernetes.io/controller: machine-learning
         immich:
           persistence:
             library:
