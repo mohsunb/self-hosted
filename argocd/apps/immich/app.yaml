@@ -15,7 +15,9 @@ spec:
         controllers:
           main:
             replicas: 2
-            strategy: Recreate
+            rollingUpdate:
+              maxSurge: 0
+              maxUnavailable: 1
             podDisruptionBudget:
               minAvailable: 1
             pod:
