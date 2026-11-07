@@ -3,10 +3,9 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - database-credentials.yaml
   - database.yaml
-  - database-config.yaml
   - pvc.yaml
+  - config.yaml
   - deployment.yaml
   - service.yaml
   - route.yaml
