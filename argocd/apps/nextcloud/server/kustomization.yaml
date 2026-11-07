@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - data.yaml
   - config.yaml
-  - statefulset.yaml
+  - deployment.yaml
   - service.yaml
   - pdb.yaml

@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: server
   namespace: nextcloud
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: server
@@ -15,11 +14,13 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: kubernetes.io/hostname
-              labelSelector:
-                matchLabels:
-                  app: server
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: server
+                topologyKey: kubernetes.io/hostname
       volumes:
         - name: data
           persistentVolumeClaim:
