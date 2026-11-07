@@ -7,4 +7,6 @@ resources:
   - database.yaml
   - database-config.yaml
   - pvc.yaml
+  - deployment.yaml
+  - service.yaml
   - route.yaml
