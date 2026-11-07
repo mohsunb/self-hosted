@@ -24,6 +24,8 @@ spec:
                 labelSelector:
                   matchLabels:
                     app: forgejo
+        podDisruptionBudget:
+          minAvailable: 1
         persistence:
           accessModes: ["ReadWriteMany"]
         httpRoute:
