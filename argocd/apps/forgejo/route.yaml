@@ -8,7 +8,7 @@ spec:
     - name: default
       namespace: kube-system
   hostnames:
-    - "forgejo.test.mohsun.az"
+    - "forgejo.test.isshin-k8s.local"
   rules:
     - matches:
         - path:

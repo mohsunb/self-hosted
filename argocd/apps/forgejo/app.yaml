@@ -32,9 +32,9 @@ spec:
             session:
               PROVIDER: redis
             server:
-              DOMAIN: forgejo.test.mohsun.az
-              ROOT_URL: http://forgejo.test.mohsun.az
-              SSH_DOMAIN: forgejo.test.mohsun.az
+              DOMAIN: forgejo.test.isshin-k8s.local
+              ROOT_URL: http://forgejo.test.isshin-k8s.local
+              SSH_DOMAIN: forgejo.test.isshin-k8s.local
           additionalConfigFromEnvs:
             - name: FORGEJO__DATABASE__HOST
               valueFrom:
