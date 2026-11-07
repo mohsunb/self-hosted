@@ -14,9 +14,19 @@ spec:
       valuesObject:
         strategy:
           type: RollingUpdate
-        service:
-          ssh:
-            type: LoadBalancer
+        replicaCount: 2
+        httpRoute:
+          enabled: true
+          parentRefs:
+            - name: default
+              namespace: kube-system
+          hostnames: ["forgejo.test.mohsun.az"]
+          terminate: false
+        tcpRoute:
+          enabled: true
+          parentRefs:
+            - name: default
+              namespace: kube-system
         gitea:
           config:
             database:
