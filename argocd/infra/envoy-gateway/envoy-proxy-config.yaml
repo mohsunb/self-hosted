@@ -15,10 +15,10 @@ spec:
               preferredDuringSchedulingIgnoredDuringExecution:
                 - weight: 100
                   podAffinityTerm:
-                  labelSelector:
                     topologyKey: kubernetes.io/hostname
-                    matchLabels:
-                      app.kubernetes.io/managed-by: envoy-gateway
-                      app.kubernetes.io/component: proxy
+                    labelSelector:
+                      matchLabels:
+                        app.kubernetes.io/managed-by: envoy-gateway
+                        app.kubernetes.io/component: proxy
       envoyPDB:
         minAvailable: 1
