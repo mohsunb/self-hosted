@@ -12,9 +12,18 @@ spec:
     helm:
       releaseName: forgejo
       valuesObject:
+        replicaCount: 2
         strategy:
           type: RollingUpdate
-        replicaCount: 2
+          maxSurge: 0
+          maxUnavailable: 1
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app: forgejo
         persistence:
           accessModes: ["ReadWriteMany"]
         httpRoute:

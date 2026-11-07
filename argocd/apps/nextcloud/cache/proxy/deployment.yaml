@@ -5,6 +5,9 @@ metadata:
   namespace: nextcloud
 spec:
   replicas: 2
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1
   selector:
     matchLabels:
       app: valkey-proxy
@@ -15,13 +18,11 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app: valkey-proxy
-                topologyKey: kubernetes.io/hostname
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  app: valkey-proxy
       containers:
         - name: valkey-proxy
           image: forge.mohsun.az/mohsunb/valkey-proxy:0.8.1
