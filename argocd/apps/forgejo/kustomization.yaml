@@ -5,6 +5,5 @@ resources:
   - namespace.yaml
   - database.yaml
   - cache
-  - anubis-config.yaml
   - app.yaml
   - route.yaml
