@@ -91,7 +91,7 @@ spec:
               - name: OG_EXPIRE_TIME
                 value: "24h"
               - name: COOKIE_SECURE
-                value: "true"
+                value: "false"
             ports:
               - containerPort: 8080
             resources:
