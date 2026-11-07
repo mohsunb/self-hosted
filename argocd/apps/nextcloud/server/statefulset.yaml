@@ -44,7 +44,7 @@ spec:
               readOnly: true
       containers:
         - name: nextcloud
-          image: docker.io/nextcloud:34.0.1
+          image: docker.io/nextcloud:35.0.2
           env:
             - name: REDIS_HOST
               value: valkey-proxy
