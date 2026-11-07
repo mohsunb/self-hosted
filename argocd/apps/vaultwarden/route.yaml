@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: server
+  namespace: vaultwarden
+spec:
+  parentRefs:
+    - name: default
+      namespace: kube-system
+  hostnames:
+    - "vaultwarden.test.mohsun.az"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: server
+          port: 80
