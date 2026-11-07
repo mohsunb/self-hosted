@@ -13,5 +13,3 @@ spec:
     initdb:
       database: vaultwarden
       owner: vaultwarden
-      secret:
-        name: database-credentials

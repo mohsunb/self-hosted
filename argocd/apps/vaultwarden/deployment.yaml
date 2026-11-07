@@ -25,16 +25,56 @@ spec:
                 matchLabels:
                   app: server
       volumes:
+        - name: generated
+          emptyDir: {}
+        - name: prepare
+          configMap:
+            name: server
         - name: data
           persistentVolumeClaim:
             claimName: data
+      initContainers:
+        - name: prepare
+          image: docker.io/python:3
+          cmd: ["/tmp/scripts/prepare.sh"]
+          env:
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: password
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: host
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: dbname
+            - name: DATABASE_URL_FILE
+              value: /run/secrets/vaultwarden/database-url
+          volumeMounts:
+            - name: prepare
+              mountPath: /tmp/scripts
+              readOnly: true
+            - name: generated
+              mountPath: /run/secrets/vaultwarden
       containers:
         - name: vaulwarden
           image: docker.io/vaultwarden/server:1.37.5
-          envFrom:
-            - secretRef:
-                name: database-config
+          env:
+            - name: DATABASE_URL_FILE
+              value: /run/secrets/vaultwarden/database-url
           volumeMounts:
+            - name: generated
+              mountPath: /run/secrets/vaultwarden
             - name: data
               mountPath: /data
           ports:

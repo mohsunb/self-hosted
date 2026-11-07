@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: database-config
-  namespace: vaultwarden
-stringData:
-  DATABASE_URL: postgresql://vaultwarden:password@database-rw:5432/vaultwarden
