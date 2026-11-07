@@ -24,7 +24,7 @@ spec:
               - topologyKey: kubernetes.io/hostname
                 labelSelector:
                   matchLabels:
-                    app: forgejo
+                    app.kubernetes.io/name: forgejo
         podDisruptionBudget:
           minAvailable: 1
         persistence:
