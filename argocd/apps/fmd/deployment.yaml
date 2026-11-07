@@ -4,11 +4,6 @@ metadata:
   name: server
   namespace: fmd
 spec:
-  replicas: 2
-  strategy:
-    rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
   selector:
     matchLabels:
       app: server
@@ -28,6 +23,15 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+      initContainers:
+        - name: fix-perms
+          image: busybox:1
+          command: ["sh", "-c", "chown -R 1000:1000 /data"]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: data
+              mountPath: /data
       containers:
         - name: fmd-server
           image: registry.gitlab.com/fmd-foss/fmd-server:0.17.1
