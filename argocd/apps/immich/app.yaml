@@ -25,9 +25,10 @@ spec:
                     - topologyKey: kubernetes.io/hostname
                       labelSelector:
                         matchLabels:
-                          app.kubernetes.io/name: immich
+                          app.kubernetes.io/instance: immich
+                          app.kubernetes.io/controller: main
                       matchLabelKeys:
-                        - app.kubernetes.io/controller
+                        - app.kubernetes.io/name
             containers:
               main:
                 image:
