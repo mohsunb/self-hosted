@@ -39,10 +39,6 @@ spec:
               ADAPTER: redis
             session:
               PROVIDER: redis
-            server:
-              DOMAIN: forgejo.test.mohsun.az
-              ROOT_URL: http://forgejo.test.mohsun.az
-              SSH_DOMAIN: forgejo.test.mohsun.az
           additionalConfigFromEnvs:
             - name: FORGEJO__DATABASE__HOST
               valueFrom:
