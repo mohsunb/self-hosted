@@ -1,0 +1,121 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: forgejo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: forgejo
+    repoURL: code.forgejo.org/forgejo-helm
+    targetRevision: 17.3.2
+    helm:
+      releaseName: forgejo
+      valuesObject:
+        strategy:
+          type: RollingUpdate
+        service:
+          http:
+            extraPorts:
+              - name: anubis
+                port: 8080
+          ssh:
+            type: LoadBalancer
+        gitea:
+          config:
+            database:
+              DB_TYPE: postgres
+            queue:
+              TYPE: redis
+            cache:
+              ADAPTER: redis
+            session:
+              PROVIDER: redis
+            server:
+              DOMAIN: forgejo.test.mohsun.az
+              ROOT_URL: http://forgejo.test.mohsun.az
+              SSH_DOMAIN: forgejo.test.mohsun.az
+          additionalConfigFromEnvs:
+            - name: FORGEJO__DATABASE__HOST
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: host
+            - name: FORGEJO__DATABASE__NAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: dbname
+            - name: FORGEJO__DATABASE__USER
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: user
+            - name: FORGEJO__DATABASE__PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: database-app
+                  key: password
+            - name: FORGEJO__QUEUE__CONN_STR
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: conn-str-db0
+            - name: FORGEJO__CACHE__HOST
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: conn-str-db1
+            - name: FORGEJO__SESSION__PROVIDER_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: valkey
+                  key: conn-str-db2
+        extraVolumes:
+          - name: anubis-policy
+            configMap:
+              name: anubis
+        extraContainers:
+          - name: anubis
+            image: ghcr.io/techarohq/anubis:latest
+            imagePullPolicy: Always
+            env:
+              - name: BIND
+                value: ":8080"
+              - name: TARGET
+                value: "http://localhost:3000"
+              - name: DIFFICULTY
+                value: "4"
+              - name: OG_PASSTHROUGH
+                value: "true"
+              - name: OG_EXPIRE_TIME
+                value: "24h"
+            ports:
+              - containerPort: 8080
+            resources:
+              requests:
+                cpu: 250m
+                memory: 256Mi
+              limits:
+                cpu: 750m
+                memory: 256Mi
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              seccompProfile:
+                type: RuntimeDefault
+            volumeMounts:
+              - name: anubis-policy
+                mountPath: /etc/anubis
+                readOnly: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: forgejo
+  syncPolicy:
+    automated:
+      enabled: true
