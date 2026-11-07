@@ -28,6 +28,8 @@ spec:
             - name: default
               namespace: kube-system
         gitea:
+          persistence:
+            accessModes: ["ReadWriteMany"]
           config:
             database:
               DB_TYPE: postgres
