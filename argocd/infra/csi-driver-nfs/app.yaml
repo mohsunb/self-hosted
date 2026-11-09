@@ -14,7 +14,6 @@ spec:
       valuesObject:
         controller:
           replicas: 2
-          runOnControlPlane: true
           affinity:
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
