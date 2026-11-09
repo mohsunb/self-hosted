@@ -14,6 +14,21 @@ spec:
       valuesObject:
         externalSnapshotter:
           enabled: true
+        storageClass:
+          create: true
+        storageClasses:
+          - name: nfs-csi
+            annotations:
+              storageclass.kubernetes.io/is-default-class: "true"
+            parameters:
+              server: 192.168.1.5
+              share: /media/nfs/kubernetes
+              subDir: "${pvc.metadata.namespace}-${pvc.metadata.name}"
+            reclaimPolicy: Delete
+            volumeBindingMode: Immediate
+            allowVolumeExpansion: true
+            mountOptions:
+              - nfsvers=4.1
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
