@@ -42,6 +42,8 @@ spec:
             - name: default
               namespace: kube-system
         gitea:
+          admin:
+            username: ""
           config:
             database:
               DB_TYPE: postgres
