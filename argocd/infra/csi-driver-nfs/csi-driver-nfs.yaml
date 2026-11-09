@@ -13,6 +13,7 @@ spec:
       releaseName: csi-driver-nfs
   destination:
     server: "https://kubernetes.default.svc"
+    namespace: kube-system
   syncPolicy:
     automated:
       enabled: true
