@@ -22,6 +22,7 @@ spec:
         path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
+        namespace: '{{ default nil .namespace }}'
       syncPolicy:
         syncOptions:
           - ServerSideApply={{ default "false" .serverSideApply }}

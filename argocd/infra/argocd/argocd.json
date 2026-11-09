@@ -1,3 +1,4 @@
 {
-	"serverSideApply": true
+	"serverSideApply": true,
+	"namespace": "argocd"
 }
