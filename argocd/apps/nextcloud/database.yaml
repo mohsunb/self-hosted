@@ -7,5 +7,7 @@ spec:
   instances: 2
   storage:
     size: 128Mi
+  walStorage:
+    size: 1Gi
   affinity:
     podAntiAffinityType: required
