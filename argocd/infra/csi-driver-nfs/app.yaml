@@ -27,8 +27,9 @@ spec:
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
                 - topologyKey: kubernetes.io/hostname
-                  matchLabelKeys:
-                    - app
+                  labelSelector:
+                    matchLabels:
+                      app: csi-nfs-controller
         externalSnapshotter:
           enabled: true
   destination:
