@@ -30,6 +30,8 @@ spec:
                   labelSelector:
                     matchLabels:
                       app: csi-nfs-controller
+        externalSnapshotter:
+          enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
