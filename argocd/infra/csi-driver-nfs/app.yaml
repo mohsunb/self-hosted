@@ -11,6 +11,17 @@ spec:
     targetRevision: 4.13.6
     helm:
       releaseName: csi-driver-nfs
+    valuesObject:
+      controller:
+        replicas: 2
+        runOnControlPlane: true
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app: csi-nfs-controller
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
