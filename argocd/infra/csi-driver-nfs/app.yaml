@@ -12,24 +12,6 @@ spec:
     helm:
       releaseName: csi-driver-nfs
       valuesObject:
-        controller:
-          replicas: 2
-          affinity:
-            # this is unnecessary (a bug with the template)
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: kubernetes.io/os
-                        operator: In
-                        values:
-                          - linux
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - topologyKey: kubernetes.io/hostname
-                  labelSelector:
-                    matchLabels:
-                      app: csi-nfs-controller
         externalSnapshotter:
           enabled: true
   destination:
