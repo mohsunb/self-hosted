@@ -8,6 +8,6 @@ spec:
   storage:
     size: 64Mi
   walStorage:
-    size: 1Gi
+    size: 64Mi
   affinity:
     podAntiAffinityType: required
