@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: csi-driver-nfs-applicaaaaaa
+  name: csi-driver-nfs-app
   namespace: argocd
 spec:
   project: default
@@ -16,7 +16,4 @@ spec:
     namespace: kube-system
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=false
+      enabled: true
