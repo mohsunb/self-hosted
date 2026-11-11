@@ -25,6 +25,9 @@ spec:
               envFrom:
                 - secretRef:
                     name: renovate
+              env:
+                - name: RENOVATE_MINIMUM_RELEASE_AGE
+                  value: "12 hours"
               volumeMounts:
                 - name: config
                   mountPath: /usr/src/app/config.js
