@@ -25,3 +25,15 @@ spec:
       - name: app
         superuser: true
         login: true
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: database
+  namespace: immich
+spec:
+  schedule: "0 */5 * * * *"
+  backupOwnerReference: self
+  cluster:
+    name: database
+    method: volumeSnapshot

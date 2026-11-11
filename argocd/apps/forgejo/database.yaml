@@ -11,3 +11,15 @@ spec:
     size: 64Mi
   affinity:
     podAntiAffinityType: required
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: database
+  namespace: forgejo
+spec:
+  schedule: "0 */5 * * * *"
+  backupOwnerReference: self
+  cluster:
+    name: database
+    method: volumeSnapshot
