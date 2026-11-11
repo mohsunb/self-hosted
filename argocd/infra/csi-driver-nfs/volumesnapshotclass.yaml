@@ -7,5 +7,4 @@ metadata:
 driver: nfs.csi.k8s.io
 deletionPolicy: Delete
 parameters:
-  server: 192.168.1.3
   share: /media/nfs/kubernetes/snapshots
