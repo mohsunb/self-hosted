@@ -22,4 +22,4 @@ spec:
   backupOwnerReference: self
   cluster:
     name: database
-    method: volumeSnapshot
+  method: volumeSnapshot
