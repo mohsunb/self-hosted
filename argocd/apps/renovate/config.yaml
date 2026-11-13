@@ -6,19 +6,27 @@ metadata:
 data:
   config.js: |
     module.exports = {
-            platform: 'forgejo',
-            endpoint: 'https://forge.mohsun.az/api/v1/',
-            gitAuthor: 'renovate[bot] <renovate-bot@forge.mohsun.az>',
-            repositories: [
-                    'mohsunb/self-hosted',
-            ],
-            onboarding: true,
-            onboardingConfig: {
-                    $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-                    extends: [
-                            'config:recommended',
-                            ':semanticCommits',
-                    ],
-            },
-            autodiscover: false,
+      platform: 'forgejo',
+      endpoint: 'https://forge.mohsun.az/api/v1/',
+      gitAuthor: 'renovate[bot] <renovate-bot@forge.mohsun.az>',
+      repositories: [
+        'mohsunb/self-hosted',
+      ],
+      onboarding: true,
+      onboardingConfig: {
+        $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+        extends: [
+          'config:recommended',
+          ':semanticCommits',
+        ],
+      },
+      autodiscover: false,
+      hostRules: [
+        {
+          matchHost: "ghcr.io",
+          hostType: "docker",
+          username: "mohsunb",
+          password: process.env.RENOVATE_GITHUB_COM_TOKEN,
+        }
+      ]
     };
