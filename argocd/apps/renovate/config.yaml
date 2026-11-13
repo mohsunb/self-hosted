@@ -21,4 +21,12 @@ data:
         ],
       },
       autodiscover: false,
+      hostRules: [
+        {
+          matchHost: "ghcr.io",
+          hostType: "docker",
+          username: "mohsunb",
+          password: process.env.RENOVATE_GITHUB_COM_TOKEN,
+        }
+      ]
     };
