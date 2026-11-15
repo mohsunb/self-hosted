@@ -26,8 +26,6 @@ spec:
                 - secretRef:
                     name: renovate
               env:
-                - name: RENOVATE_MINIMUM_RELEASE_AGE
-                  value: "12 hours"
                 - name: LOG_LEVEL
                   value: debug
               volumeMounts:
