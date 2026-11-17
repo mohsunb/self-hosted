@@ -18,7 +18,6 @@ spec:
             - name: config
               configMap:
                 name: renovate
-          volumes:
             - name: cache
               persistentVolumeClaim:
                 claimName: cache
