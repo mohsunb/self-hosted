@@ -32,12 +32,12 @@ spec:
                 - name: RENOVATE_REPOSITORY_CACHE
                   value: enabled
                 - name: RENOVATE_CACHE_DIR
-                  value: /tmp/renovate/cache
+                  value: /tmp/cache
               volumeMounts:
                 - name: config
                   mountPath: /usr/src/app/config.js
                   subPath: config.js
                   readOnly: true
                 - name: cache
-                  mountPath: /tmp/renovate/cache
+                  mountPath: /tmp/cache
           restartPolicy: Never
