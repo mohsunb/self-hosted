@@ -5,4 +5,5 @@ resources:
   - namespace.yaml
   - config.yaml
   - secret.yaml
+  - cache.yaml
   - cronjob.yaml
