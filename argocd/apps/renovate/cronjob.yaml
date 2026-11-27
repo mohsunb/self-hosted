@@ -23,7 +23,7 @@ spec:
                 claimName: cache
           containers:
             - name: renovate
-              image: docker.io/renovate/renovate:44
+              image: docker.io/renovate/renovate:45
               imagePullPolicy: Always
               envFrom:
                 - secretRef:
